@@ -62,6 +62,26 @@ class PoissonRegression:
             y: Training example labels. Shape (n_examples,).
         """
         # *** START CODE HERE ***
+        n, dim = x.shape
+
+        if self.theta is None:
+            self.theta = np.zeros(dim)
+
+        for i in range(self.max_iter):
+            predictions = np.exp(np.dot(x, self.theta))
+
+            gradient = np.dot(x.T, (y - predictions)) / n
+
+            diff = self.step_size * gradient
+            self.theta = self.theta + diff
+
+            if np.linalg.norm(diff) < self.eps:
+                print(f"Converged after {i} iterations.")
+                break
+
+            #if self.verbose and i % 1000 == 0:
+            #    loss = np.sum(y - predictions)
+            #    print(f"Iteration {i}, Loss: {loss:.4f}")
         # *** END CODE HERE ***
 
     def predict(self, x):
@@ -74,6 +94,7 @@ class PoissonRegression:
             Floating-point prediction for each input, shape (n_examples,).
         """
         # *** START CODE HERE ***
+        return np.exp(np.dot(x, self.theta))
         # *** END CODE HERE ***
 
 if __name__ == '__main__':
