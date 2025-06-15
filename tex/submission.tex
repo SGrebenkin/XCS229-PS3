@@ -62,8 +62,15 @@ instructions to regenerate this handout with your typeset \LaTeX{} solutions.
 
 % <SCPD_SUBMISSION_TAG>_1b
 \begin{answer}
-  % ### START CODE HERE ###
-  % ### END CODE HERE ###
+  For the Poisson distribution mean of the response $\mathbb{E}[Y]=\lambda$. Canonical link function as shown in 1.a. is:
+  \begin{flalign*}
+      \eta = \log \lambda
+  \end{flalign*}
+
+  Therefore, the canonical response function is:
+  \begin{flalign*}
+      g^{-1}(\eta)=\lambda = \exp(\eta)
+  \end{flalign*}
 \end{answer}
 % <SCPD_SUBMISSION_TAG>_1b
 \clearpage
@@ -80,24 +87,26 @@ instructions to regenerate this handout with your typeset \LaTeX{} solutions.
   assumption that $\eta = \theta^Tx$.
   \begin{flalign*}
     \frac{\partial \ell(\theta)}{\partial \theta_j}
-    &= \frac{\partial \log p(y^{(i)} \vert  x^{(i)}; \theta)}{\partial \theta_j}\\
+    &= \frac{\partial \log p(y^{(i)} \vert  x^{(i)}; \theta)}{\partial \theta_j} = \\
     &= \frac {\partial \log \left({\frac{1}{y^{(i)}!} \exp(\eta^T y^{(i)} -
-    e^\eta)}\right)} {\partial \theta_j}\\
-    &=\\
-    % ### START CODE HERE ###
-    % ### END CODE HERE ###
+    e^\eta)}\right)} {\partial \theta_j} =\\
+    &= \cancel{\frac {\partial \log {\frac{1}{y^{(i)}!}}}{\partial \theta_j}} +\frac{\partial (\eta^T y^{(i)} -
+    e^\eta)} {\partial \theta_j} =\\
+    &= \frac{\partial(\theta^Tx^{(i)}y^{(i)}-e^{\theta^Tx^{(i)}})}{\partial \theta_j} = \\
+    &= x_j^{(i)}(y^{(i)} - exp(\theta^Tx^{(i)}))
   \end{flalign*}
 
   Thus the stochastic gradient ascent update rule should be:
-
   \begin{equation*}
-  \theta_j := \theta_j + \alpha \frac{\partial \ell(\theta)}{\partial \theta_j},
+    \theta_j := \theta_j + \alpha \frac{\partial \ell(\theta)}{\partial \theta_j}
   \end{equation*}
 
   which reduces here to:
-  % ### START CODE HERE ###
-  % ### END CODE HERE ###
+  \begin{equation*}
+    \theta_j := \theta_j + \alpha x_j^{(i)}(y^{(i)} - exp(\theta^Tx^{(i)}))
+  \end{equation*}
 \end{answer}
+
 % <SCPD_SUBMISSION_TAG>_1c
 \clearpage
 
