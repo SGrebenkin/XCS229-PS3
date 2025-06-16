@@ -15,8 +15,8 @@ def initial_state():
 
     """
     # *** START CODE HERE ***
+    return []
     # *** END CODE HERE ***
-    pass
 
 
 def predict(state, kernel, x_i):
@@ -33,15 +33,15 @@ def predict(state, kernel, x_i):
         Returns the prediction (i.e 0 or 1)
     """
     # *** START CODE HERE ***
+    return sign(sum(w * kernel(x, x_i) for w, x in state)) if len(state) > 0 else 1
     # *** END CODE HERE ***
-    pass
 
 
 def update_state(state, kernel, learning_rate, x_i, y_i):
     """Updates the state of the perceptron.
 
     Args:
-        state: The state returned from initial_state(); state is a list of tuples 
+        state: The state returned from initial_state(); state is a list of tuples
                 (ie see grader.py self.test_state for reference)
         kernel: A binary function that takes two vectors as input and returns the result of a kernel
         learning_rate: The learning rate for the update
@@ -49,8 +49,9 @@ def update_state(state, kernel, learning_rate, x_i, y_i):
         y_i: A 0 or 1 indicating the label for a single instance
     """
     # *** START CODE HERE ***
+    result = predict(state, kernel, x_i)
+    state.append((learning_rate * (y_i - result), x_i))
     # *** END CODE HERE ***
-    pass
 
 
 def sign(a):

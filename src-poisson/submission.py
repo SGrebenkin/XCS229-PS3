@@ -70,7 +70,7 @@ class PoissonRegression:
         for i in range(self.max_iter):
             predictions = np.exp(np.dot(x, self.theta))
 
-            gradient = np.dot(x.T, (y - predictions)) / n
+            gradient = np.dot(x.T, (y - predictions))
 
             diff = self.step_size * gradient
             self.theta = self.theta + diff
